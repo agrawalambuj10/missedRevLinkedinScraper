@@ -1,7 +1,6 @@
 
 import requests
 import time
-import urllib3
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ==============================
@@ -207,7 +206,7 @@ def run_actor(company_url):
         "maxDelay": 15
     }
 
-    res = requests.post(url, json=payload, verify=False)  # ✅ SSL fix
+    res = requests.post(url, json=payload)
     data = res.json()
 
     if res.status_code != 201:
@@ -229,7 +228,7 @@ def wait_for_run(run_id, timeout=600):
     start = time.time()
     while time.time() - start < timeout:
         try:
-            res = requests.get(url, verify=False)  # ✅ SSL fix
+            res = requests.get(url)
             data = res.json()
             status = data["data"]["status"]
 
@@ -256,7 +255,7 @@ def wait_for_run(run_id, timeout=600):
 
 def fetch_results(dataset_id):
     url = f"https://api.apify.com/v2/datasets/{dataset_id}/items?token={APIFY_TOKEN}&format=json"
-    res = requests.get(url, verify=False)  # ✅ SSL fix
+    res = requests.get(url)
     return res.json()
 
 
