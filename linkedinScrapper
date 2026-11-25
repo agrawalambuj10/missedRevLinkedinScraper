@@ -4,9 +4,6 @@ import time
 import urllib3
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# Suppress SSL warnings since we're using verify=False
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 # ==============================
 # CONFIG
 # ==============================
